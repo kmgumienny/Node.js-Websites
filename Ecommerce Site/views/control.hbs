@@ -1,0 +1,104 @@
+
+{{> header}}
+
+<br>
+
+<div class="row" style="display: inline-block; width: 100%">
+    <div class="col-10 col-centered" style="float: center">
+                <h4 style="text-align: center; color: #7b7b7b; font-size: 50px">Shopping History for {{username}}
+             <i class="fas fa-user" style="color: 7b7b7b;"></i></h4>
+        <br>
+        <table class="table" style="color:#7b7b7b">
+            <thead>
+                <tr style="background-color: #00b8a4; color:white">
+                    <th scope="col">Date Purchased</th>
+                    <th scope="col">Products</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each transactions}}
+                    <tr>
+                        <th>{{this.date}}</th>
+                        <td>
+                            {{#each this.items}}
+                                <p>{{this.seltzer}}</p>
+                            {{/each}}
+                        </td>
+                        <td>{{this.total}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <div class="col-6 col-centered" style="float: center">
+        <h4 style="text-align: center; color: #7b7b7b; font-size: 50px">Change Your Password <i class="fas fa-lock"></i></h4>
+        <br>
+        <div class="form-group">
+            <div class="input-group">
+                <input id="oldPassword" type="text" class="form-control" placeholder="Old Password" name="oldPassword"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <input id="newPassword1" type="password" class="form-control" placeholder="New Password" name="newPassword1"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <input id="newPassword2" type="password" class="form-control" placeholder="Comfirm Password" name="newPassword2"/>
+            </div>
+        </div>
+        <div>
+            <button style="width: -webkit-fill-available; background-color: #00b8a4; color:white; font-weight: bold" type="button" id="passwordSubmit" class="btn btn-blue">Change Password</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        // Navigate to home page
+        $('#home').on("click", function() {
+            window.location = '/';
+        });
+
+        // Navigate to control page
+        $('#user').on("click", function() {
+            window.location = '/control';
+        });
+
+        $("#passwordSubmit").on("click", function() {
+            event.preventDefault();
+
+            // TODO password 1 and 2 dont match
+            if ($('#newPassword1').val().localeCompare($('#newPassword2').val())) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            user = {
+                oldPassword: $('#oldPassword').val(),
+                password: $('#newPassword1').val()
+            };
+
+            $.ajax({
+                url: 'control/changePassword',
+                type: 'PUT',
+                contentType: 'application/JSON',
+                data: JSON.stringify(user),
+                success: function (response) {
+                    // TODO success message
+                    location.reload();
+                },
+                error: function () {
+                    // TODO fail message
+                    alert("old password is not correct");
+                }
+            });
+        });
+    });
+</script>

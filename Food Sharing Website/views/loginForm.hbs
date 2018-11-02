@@ -1,0 +1,85 @@
+
+
+<body>
+
+{{#if error}}
+    <img class="center-fit" src="../images/pasta.jpg" style="position: absolute; top:0%;left:0%;opacity: 0.6; object-fit: cover; height: 100%; width:100%; overflow: hidden;">
+
+{{else}}
+    <img class="center-fit" src="images/pasta.jpg" style="position: absolute; top:0%;left:0%;opacity: 0.6; object-fit: cover; height: 100%; width:100%; overflow: hidden;">
+
+{{/if}}
+
+<div class="login-form" style="position:absolute; background-color:#02a6ff; left: -10%; height: 100%;">
+    <div style="">
+        <h3 style="margin-left:30%;margin-right:30%;width:40%;text-align:center; color:white; font-size:5em; font-weight:600;text-shadow: 2px 4px 3px rgba(0,0,0,0.3)"> Log In </h3>
+        <br>
+        {{#if error}}
+            <h2 id="loginErrorMessage" style="margin-left:30%;margin-right:30%;width:40%;text-align:center; color:white; font-size:3em; font-weight:200;text-shadow: 2px 4px 3px rgba(0,0,0,0.3)">User not found</h2>
+        {{/if}}
+	<form action="/loginform/" method="post" style="display:block; margin-left:auto;margin-right:auto;width:40%">
+        <input type="text" name="logemail" placeholder="E-mail" required="" > <br>
+        <input type="password" name="logpassword" placeholder="Password" required="">
+        <br><br>
+        <div class="tp">
+            <input type="submit" style="display:block; margin-left:auto;margin-right:auto;width:40%;font-size:28px; font-weight:500; width: 60%; border-color:white; background-color: #0874ad; color: white; cursor:pointer" value="Submit">
+        </div>
+    </form>
+
+
+<br><br>
+
+<h3 style="margin-left:30%;margin-right:30%;width:40%;text-align:center; color:white; font-size:5em; font-weight:600;text-shadow: 2px 4px 3px rgba(0,0,0,0.3)">Register</h3>
+<br>
+        {{#if duplicate}}
+            <h2 id="loginErrorMessage" style="margin-left:30%;margin-right:30%;width:40%;text-align:center; color:white; font-size:3em; font-weight:200;text-shadow: 2px 4px 3px rgba(0,0,0,0.3)">Email taken, sorry!</h2>
+        {{/if}}
+
+        <h2 id="successMessage" style="display: none; margin-left:30%;margin-right:30%;width:40%;text-align:center; color:white; font-size:3em; font-weight:200;text-shadow: 2px 4px 3px rgba(0,0,0,0.3)">Success</h2>
+        <h2 id="errorMessage" style="display: none; margin-left:30%;margin-right:30%;width:40%;text-align:center; color:white; font-size:3em; font-weight:200;text-shadow: 2px 4px 3px rgba(0,0,0,0.3)">Passwords don't match</h2>
+
+
+        <div class="register-form">
+    <form id="registerForm" action="/loginForm/" method="post" style="display:block; margin-left:auto;margin-right:auto;width:40%">
+        <input type="text" name="email" placeholder="E-mail" required="">
+        <input type="text" name="name" placeholder="Username" required="">
+        <input id="password" type="password" name="password" placeholder="Password" required="">
+        <input id="passwordConf" type="password" name="passwordConf" placeholder="Confirm Password" required="">
+        <br>
+        <input type="submit" style="display:block; margin-left:auto;margin-right:auto;width:40%;font-size:28px; font-weight:500; width: 60%; border-color:white; background-color: #0874ad; color: white; cursor:pointer" value="Register">
+    </form>
+</div>
+</div>
+</div>
+
+<script>
+    $('#registerForm').submit(function(e){
+        if ($('#password').val() != $('#passwordConf').val()){
+            e.preventDefault();
+            $('#password').val("");
+            $('#passwordConf').val("")
+            $('#errorMessage').toggle();
+            setTimeout(function(){
+                $('#errorMessage').toggle();
+            }, 3000);
+        }
+        else {
+            $('#successMessageMessage').toggle();
+            setTimeout(function () {
+                return true;
+            }, 3000);
+        }
+    });
+</script>
+
+<style>    
+input, select {
+	width: 120%;
+    padding:8px 20px;
+    margin: 0px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;  
+}
+</style>

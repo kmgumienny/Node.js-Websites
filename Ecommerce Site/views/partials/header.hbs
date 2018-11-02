@@ -1,0 +1,60 @@
+<nav class="shadow navbar sticky-top navbar-dark navbar-expand-md" style="background-image: linear-gradient(to right, #00b8a4 , #5bdacc) !important;">
+    <a class="navbar-brand" href="/" style="color:white; font-size: 30px; font-weight: bold">Fizz</a>
+    <button class="navbar-toggler" style="border-color: white;" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+
+        <ul class="navbar-nav mr-auto">
+            {{!-- <input class="form-control mr-sm-2" style="width: 400px" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" style="color: white; border-color: white;" type="submit">Search</button> --}}
+            <!-- <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              </li> -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+              </li> -->
+        </ul>
+        <span class="navbar-text">
+            {{#if isLoggedIn}}
+                {{#if isTransactions}}
+                    <a id="loginA" class="nav-link" data-toggle="modal" data-target="#loggedInModal" style="color: white; text-decoration: underline; font-weight: bold; font-size: 20px" href="#">{{username}}</a>
+                {{else}}
+                        <a id="loginA" class="nav-link" data-toggle="modal" data-target="#loggedInModal" style="color: white; text-decoration: underline; font-weight: bold; font-size: 20px" href="#">{{username}}</a>
+                    </span>
+                    <span class="navbar-text">
+                        <a id="logout" class="nav-link" style="color: white; text-decoration: underline; font-weight: bold; font-size: 20px">SIGN OUT</a>
+                {{/if}}
+            {{else}}
+                {{#unless isTransactions}}
+                    <a id='loginA' data-toggle="modal" data-target="#signInModal" class="nav-link" style="color: white; text-decoration: underline; font-weight: bold; font-size: 20px">SIGN IN</a>
+                {{/unless}}
+            {{/if}}
+        </span>
+        <span class="navbar-text">
+            <i id="home" class="fa fa-home" aria-hidden="true" style="font-size: 30px; color: white; margin-right: 20px;"></i>
+        </span>
+        <span class="navbar-text">
+            {{#if isLoggedIn}}
+                <i id="user" class="fas fa-user" style="font-size: 30px; color: white; margin-right: 20px;"></i>
+            {{else}}
+                <i id="user2" class="fas fa-user" style="font-size: 30px; color: #58a598; margin-right: 20px;"></i>
+            {{/if}}
+        </span>
+        <span class="navbar-text">
+            {{#if isTransactions}}
+                <i id="shoppingCartIcon" class="fas fa-shopping-cart" style="font-size: 30px; color: #58a598"></i>
+            {{else}}
+                {{#if isLoggedIn}}
+                    <i id="shoppingCartIcon" class="fas fa-shopping-cart" style="font-size: 30px; color: white"></i>
+                {{else}}
+                    <i id="shoppingCartIcon2" class="fas fa-shopping-cart" style="font-size: 30px; color: #58a598"></i>
+                {{/if}}
+            {{/if}}
+        </span>
+    </div>
+</nav>

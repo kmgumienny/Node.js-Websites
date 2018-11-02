@@ -1,0 +1,742 @@
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+</head>
+
+<style>
+
+    #snackbar {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+    }
+
+    #snackbar.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    #snackbar2 {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+    }
+
+    #snackbar2.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @-webkit-keyframes fadein {
+        from {
+            bottom: 0;
+            opacity: 0;
+        }
+        to {
+            bottom: 30px;
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadein {
+        from {
+            bottom: 0;
+            opacity: 0;
+        }
+        to {
+            bottom: 30px;
+            opacity: 1;
+        }
+    }
+
+    @-webkit-keyframes fadeout {
+        from {
+            bottom: 30px;
+            opacity: 1;
+        }
+        to {
+            bottom: 0;
+            opacity: 0;
+        }
+    }
+
+    @keyframes fadeout {
+        from {
+            bottom: 30px;
+            opacity: 1;
+        }
+        to {
+            bottom: 0;
+            opacity: 0;
+        }
+    }
+
+</style>
+
+<body style="background: #e8e8e8">
+
+<nav class="shadow navbar sticky-top navbar-dark navbar-expand-md"
+     style=" width: 100%; position: fixed; top: 0; background-image: linear-gradient(to right, #02a6ff, #00e9ff) !important;">
+    <a class="navbar-brand" href="/"
+       style="color:white; font-size: 30px; font-weight: bold; text-shadow: 2px 4px 3px rgba(0,0,0,0.3);">Yeat</a>
+    <button class="navbar-toggler" style="border-color: white;" type="button" data-toggle="collapse"
+            data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+
+        <ul class="navbar-nav mr-auto">
+            <input id="searchInput" class="form-control mr-sm-2" style="width: 400px" type="search" placeholder="Search"
+                   aria-label="Search">
+        </ul>
+        <span class="navbar-text">
+        <a href="/logout" class="nav-link"
+           style="color: white; text-decoration: underline; font-weight: bold; font-size: 15px;"
+        >Log Out</a>
+      </span>
+    </div>
+</nav>
+
+<button id="addevent" onclick=goToCreate()
+        style="border-color: white; position: fixed; z-index: 1; top: 70px; width:55px;border-radius:50%;color:white;background-color:#00e9ff;font-size:30px;font-weight:600;text-align:center;margin: 4px 2px;padding:2px;cursor:pointer">
+    +
+</button>
+
+<div id="cardsHere" class="col-9"
+     style="margin-top: 7%; height: 100%; float: left; padding-right: 0px; padding-left: 0px;">
+
+    <div id="owned">
+        <div class="card shadow"
+             style="text-shadow: 2px 4px 3px rgba(0,0,0,0.3); font-size: 30px; color:white; background-color: red; text-align:center; width: 100%; margin-top: 10px; display: inline-block;">
+            My Events
+        </div>
+        {{#each eventsOwned}}
+            {{#if this.active}}
+                <div class="eventCard card shadow"
+                     style="width: 100%; margin-top: 10px; display: inline-block; margin-bottom: 10px;">
+                    <div class="row">
+                        <div class="col-3" style="float: left; padding-left: 0px; padding-right: 0px">
+                            <img class="card-img-top" src={{this.image}} alt="Card image cap"
+                                 style="width: 100%; height: 100%;">
+                        </div>
+                        <div id="{{this._id}}" class="findThis col-9">
+                            <div class="card-body" style="padding: 0px; float: left">
+                                <h4 class="card-title">{{this.name}}</h4>
+                                <h5 class="card-title" style="margin-top: -18px; color: #717171">{{this.date}}</h5>
+                                <p class="card-text">{{this.description}}</p>
+                                <p class="card-text"><b>Location:</b> {{this.location}}</p>
+                                <br>
+                                <br>
+                                <div class="row">
+                                    <a id="{{this._id}}" onclick="closeEvent(this)"
+                                       style="font-weight: bold; border-color: red; background-color: red; color: white; position: absolute; left: 15px; bottom: 15px"
+                                       class="btn btn-danger">Close Event</a>
+                                    <h5 style="color: #717171; position: absolute; right: 30px; bottom: 10px">
+                                        Currently: {{this.attending.length}} / {{this.maxAttendance}} Attendees</h5>
+                                    <i class="fas fa-check-square"
+                                       style="color: red; font-size: 25px; position: absolute; top: 1px; right: 20px; width: 20px; height: 20px;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul id="{{this._id}}" class="list-group eventId" style
+                "margin-top: 10px">
+                {{#each this.requested}}
+                    <li class="list-group-item">
+                        <p style="font-weight:600; cursor:pointer"
+                           onclick="showModal({{JSONstringify this}})"> {{this.name}}</p> would like to attend!
+                        <a id="{{this._id}}" href="#" onclick="acceptRequest(this)" class="btn btn-success">Accept</a>
+                        <a id="{{this._id}}" href="#" onclick="declineRequest(this)" class="btn btn-danger">Decline</a>
+                    </li>
+                {{/each}}
+                {{#each this.attending}}
+                    <li class="list-group-item">
+                        <p style="font-weight:600; cursor:pointer"
+                           onclick="showModal({{JSONstringify this}})"> {{this.name}}</p> is attending your event.
+                    </li>
+                {{/each}}
+                </ul>
+
+            {{/if}}
+        {{/each}}
+    </div>
+
+    <div id="attending">
+        <div class="card shadow"
+             style="text-shadow: 2px 4px 3px rgba(0,0,0,0.3);font-size: 30px; color:white; background-color: #32cd32; text-align:center; width: 100%; margin-top: 10px; display: inline-block;">
+            Accepted Events
+        </div>
+        {{#each eventsAttending}}
+            {{#if this.active}}
+                <div class="eventCard card shadow"
+                     style="width: 100%; margin-top: 10px; display: inline-block; margin-bottom: 10px;">
+                    <div class="row">
+                        <div class="col-3" style="float: left; padding-left: 0px; padding-right: 0px">
+                            <img class="card-img-top" src={{this.image}} alt="Card image cap"
+                                 style="width: 100%; height: 100%;">
+                        </div>
+                        <div id="{{this._id}}" class="findThis col-9">
+                            <div class="card-body" style="padding: 0px; float: left">
+                                <h4 class="card-title">{{this.name}}</h4>
+                                <h5 class="card-title" style="margin-top: -18px; color: #717171">{{this.date}}</h5>
+                                <p class="card-text">{{this.description}}</p>
+                                <p class="card-text"><b>Location:</b> {{this.location}}</p>
+                                <br>
+                                <br>
+                                <div class="row">
+                                    <a id="{{this._id}}"
+                                       style="font-weight: bold; border-color: #32CD32; background-color: #32CD32; color: white; position: absolute; left: 15px; bottom: 15px"
+                                       class="btn btn-success">Attending</a>
+                                    <h5 style="color: #717171; position: absolute; right: 30px; bottom: 10px">
+                                        Currently: {{this.attending.length}} / {{this.maxAttendance}} Attendees</h5>
+                                    <i class="fas fa-check-square"
+                                       style="color: #32CD32; font-size: 25px; position: absolute; top: 1px; right: 20px; width: 20px; height: 20px;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+
+    <div id="applied">
+        <div class="card shadow"
+             style="text-shadow: 2px 4px 3px rgba(0,0,0,0.3); font-size: 30px; color:white; background-color: #f9c74a; text-align:center; width: 100%; margin-top: 10px; display: inline-block;">
+            Pending Events
+        </div>
+        {{#each eventsApplied}}
+            {{#if this.active}}
+                <div class="eventCard card shadow"
+                     style="width: 100%; margin-top: 10px; display: inline-block; margin-bottom: 10px;">
+                    <div class="row">
+                        <div class="col-3" style="float: left; padding-left: 0px; padding-right: 0px">
+                            <img class="card-img-top" src={{this.image}} alt="Card image cap"
+                                 style="width: 100%; height: 100%;">
+                        </div>
+                        <div id="{{this._id}}" class="findThis col-9">
+                            <div class="card-body" style="padding: 0px; float: left">
+                                <h4 class="card-title">{{this.name}}</h4>
+                                <h5 class="card-title" style="margin-top: -18px; color: #717171">{{this.date}}</h5>
+                                <br>
+                                <br>
+                                <div class="row">
+                                    <a id="requestToAttend"
+                                       style="font-weight: bold; border-color: #f9c74a; background-color: #f9c74a; color: white; position: absolute; left: 15px; bottom: 15px"
+                                       class="btn btn-warning" disabled>Pending</a>
+                                    <h5 style="color: #717171; position: absolute; right: 30px; bottom: 10px">
+                                        Currently: {{this.attending.length}} / {{this.maxAttendance}} Attendees</h5>
+                                    <i class="fas fa-check-square"
+                                       style="color: #f9c74a; font-size: 25px; position: absolute; top: 1px; right: 20px; width: 20px; height: 20px;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+
+    <div id="all">
+        <div class="card shadow"
+             style="text-shadow: 2px 4px 3px rgba(0,0,0,0.3);; font-size: 30px; color:white; background-color: #02a6ff; text-align:center; width: 100%; margin-top: 10px; display: inline-block;">
+            All Events
+        </div>
+        {{#each allEvents}}
+            {{#if this.active}}
+                {{#compare this.owner "!=" @root.userId}}
+                    <!-- {{#contains2 this.requested @root.userId}} -->
+                        <!-- {{#contains2 this.attending @root.userId}} -->
+                            <div class="eventCard card shadow"
+                                 style="width: 100%; margin-top: 10px; display: inline-block; margin-bottom: 10px;">
+                                <div class="row">
+                                    <div class="col-3" style="float: left; padding-left: 0px; padding-right: 0px">
+                                        <img class="card-img-top" src={{this.image}} alt="Card image cap"
+                                             style="width: 100%; height: 100%;">
+                                    </div>
+                                    <div id="{{this._id}}" class="findThis col-9">
+                                        <div class="card-body" style="padding: 0px; float: left">
+                                            <h4 class="card-title">{{this.name}}</h4>
+                                            <h5 class="card-title" style="margin-top: -18px; color: #717171">{{this.date}}</h5>
+                                            <p class="card-text">{{this.description}}</p>
+
+                                            <br>
+                                            <br>
+                                            <div class="row">
+                                                <a id="requestToAttend" onclick="requestToJoin(this)"
+                                                   style="font-weight: bold; border-color: #02a6ff; background-color: #02a6ff; color: white; position: absolute; left: 15px; bottom: 15px"
+                                                   class="btn btn-primary">Request to Attend</a>
+                                                <h5 style="color: #717171; position: absolute; right: 30px; bottom: 10px">
+                                                    Currently: {{this.attending.length}} / {{this.maxAttendance}} Attendees</h5>
+                                                <i class="fas fa-check-square"
+                                                   style="color: #02a6ff; font-size: 25px; position: absolute; top: 1px; right: 20px; width: 20px; height: 20px;"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- {{/contains2}} -->
+                    <!-- {{/contains2}} -->
+                {{/compare}}
+            {{/if}}
+        {{/each}}
+    </div>
+</div>
+
+<div class="col-3"
+     style="border-left-style: groove; border-left-color: #00e9ff; margin-top: 5%; float: right; text-align: center; position: fixed; right: 0px; height: 100%; background-color: #00e9ff;  display: block;">
+
+    {{#if image}}
+        <img id="userPhoto" class="shadow-sm" src="{{image}}"
+             style="width:60%; margin-left:5%; border-radius: 60%; margin-top: 5%">
+
+    {{else}}
+        <img id="userPhoto" class="shadow-sm" src="images/Profile.png"
+             style="width:60%; margin-left:5%; border-radius: 60%; margin-top: 5%">
+
+    {{/if}}
+    <form style="display: none" action="/main/profilePic/" method="post" enctype="multipart/form-data" id="photoForm">
+        <input id="avatar" type="file" name="photo" accept="image/*" style="color:white">
+        <input id="submitPic" type="submit" role="button" value="Create"
+               style="font-size:32px; width: 30%; border:none; font-weight:600; border-color:white; background-color: #0874ad; color: white; text-align:center; text-shadow: 2px 4px 3px rgba(0,0,0,0.3);">
+
+    </form>
+
+    <h3 style="color:white; text-shadow: 2px 4px 3px rgba(0,0,0,0.3);">{{username}}</h3>
+    <br><br>
+    <div id="bioDiv">
+        {{#if bio}}
+            <h5 id="bio" class="sideBarText">{{bio}}</h5>
+        {{else}}
+            <h5 id="bio" class="sideBarText">Have something you want to share in your bio? Click to edit</h5>
+        {{/if}}
+    </div>
+
+    <div id="faveDiv">
+        {{#if fave}}
+            <h7 id="fave" class="sideBarText">Favorite Food: {{fave}}</h7>
+        {{else}}
+            <h7 id="fave" class="sideBarText">Click here to add your favorite food!</h7>
+        {{/if}}
+    </div>
+
+    <br><br>
+
+    <div style="display: grid; text-align: left;">
+        <a onclick="toggleDisplay('owned')"
+           style=" height:13%; background-size: cover; margin-bottom:5px; border-radius: 10px; color:white; font-size: 50px; text-shadow: 2px 4px 3px rgba(0,0,0,0.3);">
+            <i class="fas fa-check-square" style="color: red;"></i>
+            My Events
+        </a>
+        <a onclick="toggleDisplay('attending')"
+           style=" height:13%; background-size: cover; margin-bottom:5px; border-radius: 10px; color:white; font-size: 50px; text-shadow: 2px 4px 3px rgba(0,0,0,0.3);">
+            <i class="fas fa-check-square" style="color: #32CD32;"></i> Accepted
+        </a>
+        <a onclick="toggleDisplay('applied')"
+           style=" height:13%; background-size: cover; margin-bottom:5px; border-radius: 10px; color:white; font-size: 50px; text-shadow: 2px 4px 3px rgba(0,0,0,0.3);">
+            <i class="fas fa-check-square" style="color: #f9c74a;"></i> Pending
+        </a>
+    </div>
+
+    <div id="modaling" class="modal">
+        <form class="modal-content animate">
+            <div id="image-in-modal"></div>
+            <div id="modalling" style="color:white; font-weight: bold; background-color:#20a6ff" class="container">
+                <p id="modal-image"></p>
+                <p id="modal-name"></p>
+                <p id="modal-email"></p>
+                <p id="modal-bio"></p>
+                <p id="modal-fave"></p>
+
+
+            </div>
+
+        </form>
+    </div>
+
+
+    <div id="snackbar" style="background-color:#02a6ff">Update Successful</div>
+    <div id="snackbar2" style="background-color:#ff020f">Update Failed</div>
+</div>
+</body>
+
+<style>
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 50;
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        padding-top: 60px;
+    }
+
+    .modal-content {
+        border-radius: 1em;
+        background-color: lightblue;
+        margin: 5px auto; /* 15% from the top and centered */
+        border: 1px solid #888;
+        width: 50%; /* Could be more or less, depending on screen size */
+    }
+
+    .animate {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
+    }
+
+    @-webkit-keyframes animatezoom {
+        from {
+            -webkit-transform: scale(0)
+        }
+        to {
+            -webkit-transform: scale(1)
+        }
+    }
+
+    @keyframes animatezoom {
+        from {
+            transform: scale(0)
+        }
+        to {
+            transform: scale(1)
+        }
+    }
+</style>
+<script>
+
+
+    $('#userPhoto').click(function () {
+        $('#avatar').click();
+        $(document).on('change', '#avatar', function () {
+            $('#submitPic').click();
+        })
+    });
+
+    $(document).ready(function () {
+        $("#searchInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $(".eventCard").filter(function () {
+                $(this).toggle($(this).find('.card-title').text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        var originalBio = $('#bio');
+        var originalFave = $('#fave');
+        var inputBio = $('<input />', {
+            'type': 'text',
+            'placeholder': originalBio.text(),
+            'id': 'inputBio',
+            'style': 'width: 300px'
+        });
+        var inputFave = $('<input />', {
+            'type': 'text',
+            'placeholder': originalFave.text(),
+            'id': 'inputFave'
+        });
+
+        $('#bioDiv').on('click', '#bio', function () {
+            $('#bio').replaceWith(inputBio);
+            $('#bioDiv').find('#inputBio').focus();
+            $('#bioDiv').find('#inputBio').on('focusout', function () {
+                if ($('#inputBio').val()) {
+                    originalBio.text($('#inputBio').val());
+                    $.ajax({
+                        url: '/main/changeBioFave',
+                        type: 'post',
+                        data: {
+                            bio: $('#inputBio').val()
+                        },
+                        success: function (response) {
+                            var x = document.getElementById("snackbar");
+                            x.className = "show";
+                            setTimeout(function () {
+                                x.className = x.className.replace("show", "");
+                            }, 3000)
+                            location.reload();
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    }).then($('#inputBio').replaceWith(originalBio));
+
+                } else {
+                    $('#inputBio').replaceWith(originalBio)
+                }
+            })
+        });
+
+
+        $('#faveDiv').on('click', '#fave', function () {
+            $('#fave').replaceWith(inputFave);
+            //$('#inputBio').replaceWith(originalElement);
+            $('#faveDiv').find('#inputFave').focus();
+            $('#faveDiv').find('#inputFave').on('focusout', function () {
+                //var isChanged = false;
+                if ($('#inputFave').val()) {
+                    originalFave.text($('#inputFave').val());
+                    //isChanged = true;
+                    $.ajax({
+                        url: '/main/changeBioFave',
+                        type: 'post',
+                        data: {
+                            fave: $('#inputFave').val()
+                        },
+                        success: function (response) {
+                            var x = document.getElementById("snackbar");
+                            x.className = "show";
+                            setTimeout(function () {
+                                x.className = x.className.replace("show", "");
+                            }, 3000)
+                            location.reload();
+                        },
+                        error: function () {
+                            var x = document.getElementById("snackbar2");
+                            x.className = "show";
+                            setTimeout(function () {
+                                x.className = x.className.replace("show", "");
+                            }, 3000)
+                        }
+                    }).then($('#inputFave').replaceWith(originalFave));
+
+                }
+                else
+                    $('#inputFave').replaceWith(originalFave);
+            })
+        });
+    });
+
+    function toggleDisplay(id) {
+        var div = document.getElementById(id);
+        console
+        if (div.style.display === "none") {
+            div.style.display = "block";
+        } else {
+            div.style.display = "none";
+        }
+    }
+
+    function showModal(user) {
+        //Populate the fields inside the modal
+        //document.getElementById('modal-image').innerHTML = user.image;
+        var img = document.createElement("img");
+        var img_src = user.photo
+        if (img_src == null) {img_src = "../images/Profile.png"}
+        img.src = img_src.substring(2);
+        img.width = 160
+        img.height = 160
+        var image = document.getElementById('modal-image');
+        image.innerHTML = '<img src="'+img.src+'" width=150px height=160px/>';
+
+        //document.getElementById('modalling').appendChild(img);
+        document.getElementById('modal-name').innerHTML = "Username: "+user.name;
+        document.getElementById('modal-email').innerHTML = "Email: "+ user.email;
+        if (user.bio == null) {
+            document.getElementById('modal-bio').innerHTML = "This user does not have any bio";
+        }
+        else document.getElementById('modal-bio').innerHTML = "About: "+ user.bio;
+        if (user.fave == null) {
+            document.getElementById('modal-fave').innerHTML = "This user doesn't have any favorite food"
+        }
+        else document.getElementById('modal-fave').innerHTML = "Favorite food: "+ user.fave;
+        var modal = document.getElementById('modaling')
+        modal.style.display='block'
+        //var userId = button.id;
+        //var eventId = $(button).closest(".eventId").attr('id');
+
+        //var modal = document.getElementById('modaling');
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    }
+
+    function goToCreate() {
+        window.location.href = 'createevent', true;
+    }
+
+    function requestToJoin(e) {
+        var joinThis = $(e).closest(".findThis").attr('id');
+        $.ajax({
+            url: '/main/requestEvent',
+            type: 'post',
+            data: {
+                eventId: joinThis
+            },
+            success: function (response) {
+                var x = document.getElementById("snackbar");
+                x.className = "show";
+                setTimeout(function () {
+                    x.className = x.className.replace("show", "");
+                }, 3000)
+                location.reload();
+            },
+            error: function () {
+                var x = document.getElementById("snackbar2");
+                x.className = "show";
+                setTimeout(function () {
+                    x.className = x.className.replace("show", "");
+                }, 3000)
+            }
+        });
+    }
+
+    function showModal(user) {
+        //Populate the fields inside the modal
+        //document.getElementById('modal-image').innerHTML = user.image;
+        var img = document.createElement("img");
+        var img_src = user.photo
+        if (img_src == null) {
+            img_src = "../images/Profile.png"
+        }
+        img.src = img_src.substring(2);
+        img.width = 160
+        img.height = 160
+        var image = document.getElementById('modal-image');
+        image.innerHTML = '<img src="' + img.src + '" width=150px height=160px/>';
+
+        //document.getElementById('modalling').appendChild(img);
+        document.getElementById('modal-name').innerHTML = "Username: " + user.name;
+        document.getElementById('modal-email').innerHTML = "Email: " + user.email;
+        if (user.bio == null) {
+            document.getElementById('modal-bio').innerHTML = "This user does not have any bio";
+        }
+        else document.getElementById('modal-bio').innerHTML = "About: " + user.bio;
+        if (user.fave == null) {
+            document.getElementById('modal-fave').innerHTML = "This user doesn't have any favorite food"
+        }
+        else document.getElementById('modal-fave').innerHTML = "Favorite food: " + user.fave;
+        var modal = document.getElementById('modaling')
+        modal.style.display = 'block'
+        //var userId = button.id;
+        //var eventId = $(button).closest(".eventId").attr('id');
+
+        //var modal = document.getElementById('modaling');
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    }
+
+    function acceptRequest(button) {
+        var userId = button.id;
+        var eventId = $(button).closest(".eventId").attr('id');
+
+        $.ajax({
+            url: '/main/acceptRequest',
+            type: 'post',
+            data: {
+                userId: userId,
+                eventId: eventId
+            },
+            success: function (response) {
+                var x = document.getElementById("snackbar");
+                x.className = "show";
+                setTimeout(function () {
+                    x.className = x.className.replace("show", "");
+                }, 3000)
+                location.reload();
+                location.reload();
+            },
+            error: function () {
+                var x = document.getElementById("snackbar2");
+                x.className = "show";
+                setTimeout(function () {
+                    x.className = x.className.replace("show", "");
+                }, 3000)
+            }
+        });
+    }
+
+
+    function declineRequest(button) {
+        var userId = button.id;
+        var eventId = $(button).closest(".eventId").attr('id');
+
+        $.ajax({
+            url: '/main/declineRequest',
+            type: 'delete',
+            data: {
+                userId: userId,
+                eventId: eventId
+            },
+            success: function (response) {
+                var x = document.getElementById("snackbar");
+                x.className = "show";
+                setTimeout(function () {
+                    x.className = x.className.replace("show", "");
+                }, 3000)
+                location.reload();
+                location.reload();
+            },
+            error: function () {
+                var x = document.getElementById("snackbar2");
+                x.className = "show";
+                setTimeout(function () {
+                    x.className = x.className.replace("show", "");
+                }, 3000)
+            }
+        });
+    }
+
+    function closeEvent(button) {
+        var eventId = button.id;
+
+        $.ajax({
+            url: '/main/closeEvent',
+            type: 'delete',
+            data: {
+                eventId: eventId
+            },
+            success: function (response) {
+                var x = document.getElementById("snackbar");
+                x.className = "show";
+                setTimeout(function () {
+                    x.className = x.className.replace("show", "");
+                }, 3000)
+                location.reload();
+                location.reload();
+            },
+            error: function () {
+                var x = document.getElementById("snackbar2");
+                x.className = "show";
+                setTimeout(function () {
+                    x.className = x.className.replace("show", "");
+                }, 3000)
+            }
+        });
+    }
+</script>

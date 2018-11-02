@@ -1,0 +1,173 @@
+
+
+
+
+
+
+{{#if isLoggedIn}}
+    <div class="modal fade bannerformmodal" tabindex="-1" role="dialog" id="loggedInModal">
+        <div class="modal-dialog modal-sm">
+            <div style="width: max-content; "class="modal-content">
+                <div class="modal-content" style="border-color: #1e8e82">
+                    <div class="modal-header" style="background-color: #00b8a4">
+                        <h4 class="modal-title" style="color: white">Hi {{username}}!</h4>
+                        <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <h5 style="color: #7b7b7b">Hope you're enjoying Fizz</h5>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-danger btn-default pull-left" data-dismiss="modal" style="background-color: #58a598; border-color: #58a598"><span class="glyphicon glyphicon-remove"></span>Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{{else}}
+
+
+<div class="modal fade bannerformmodal" tabindex="-1" role="dialog" id="signInModal">
+    <div class="modal-dialog modal-sm">
+        <div style="width: max-content; "class="modal-content">
+            <div class="modal-content" style="border-color: #1e8e82">
+                <div class="modal-header" style="background-color: #00b8a4;">
+                    <h4 class="modal-title" style="color:white">Sign in</h4>
+                    <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="signIn">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span style='width: 20px; color: #7b7b7b' class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                <input id="signInEmail" type="email" class="form-control" placeholder="Email" name="email1" required = "required"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span style='width: 20px; color: #7b7b7b' class="input-group-addon"><i class="fa fa-key"></i></span>
+                                <input id="signInPassword" type="text" class="form-control" placeholder="Password" name="password"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="signInSubmit" type="button" class="btn btn-blue" style="background-color: #00b8a4; color:white">Submit</button>
+                    <button  class="btn btn-danger btn-default pull-left" data-dismiss="modal" style="background-color: #58a598; border-color: #58a598">
+                        <span data-dismiss="modal" class="glyphicon glyphicon-remove"></span> Cancel</button>
+                    <p style="margin: auto";>Not a member? <a id="signUp" href="javascript:signingUp()">Sign Up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bannerformmodal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodal" aria-hidden="true" id="signUpModal">
+    <div class="modal-dialog modal-sm">
+        <div style="width: max-content; "class="modal-content">
+            <div class="modal-content" style="border-color: #1e8e82">
+                <div class="modal-header" style="background-color: #00b8a4;">
+                    <h4 class="modal-title" style="color:white" id="myModalLabel">Sign Up</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="signUp">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span style='width: 20px; color: #7b7b7b' class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input id="signUpName" type="text" class="form-control" placeholder="First Name" name="fName"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span style='width: 20px; color: #7b7b7b' class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                <input id="signUpEmail" type="text" class="form-control" placeholder="Email" name="email"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span style='width: 20px; color: #7b7b7b' class="input-group-addon"><i class="fa fa-key"></i></span>
+                                <input id="signUpPassword" type="password" class="form-control" placeholder="Password" name="password"/>
+                            </div>
+                        </div>
+                        <div>
+                        <!--suppress CssInvalidPropertyValue -->
+                            <button style="width: -webkit-fill-available; background-color: #00b8a4; color:white" type="button" id="signUpSubmit" class="btn btn-blue">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <!--suppress CssInvalidPropertyValue -->
+                    <button style="width: -webkit-fill-available; background-color: #58a598; color:white; border-color: #58a598" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+
+<script type="text/javascript">
+    function signingUp() {
+        $('#signInModal').modal('hide');
+        $('#signUpModal').modal('show');
+    }
+</script>
+
+<script>
+    $(function () {
+        $("#signUpSubmit").click(function(event) {
+            event.preventDefault();
+            alert("called");
+            newUser = {
+                name: $('#signUpName').val(),
+                email: $('#signUpEmail').val(),
+                password: $('#signUpPassword').val()
+            };
+
+            $.ajax({
+                url: '/signup',
+                type: "POST",
+                contentType: 'application/JSON',
+                data: JSON.stringify(newUser),
+                success: function () {
+                    // alert("success");
+                    $('.modal-body').replaceWith('<h4>Succesful Sign Up </h4> <br> <h5> Redirecting </h5>');
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                }
+            });
+        })
+
+        $("#signInSubmit").click(function(event) {
+            event.preventDefault();
+            lookupUser = {
+                email: $('#signInEmail').val(),
+                password: $('#signInPassword').val()
+            };
+
+            $.ajax({
+                url: '/login',
+                type: "POST",
+                contentType: 'application/JSON',
+                data: JSON.stringify(lookupUser),
+                success: function (response) {
+                    // alert("success");
+                    $('.modal-body').replaceWith('<h4>Succesful Login </h4> <br> <h5> Redirecting </h5>');
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                },
+
+                error: function () {
+                    alert("could not find user");
+                }
+            });
+        })
+    })
+</script>

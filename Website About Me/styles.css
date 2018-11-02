@@ -1,0 +1,142 @@
+p {
+  color:white;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+h1 {
+  font-family: fantasy;
+  color: orange;
+  font-size: 50px;
+  text-decoration: underline;
+}
+
+h2 {
+  font-family: fantasy;
+  color: orange;
+  font-size: 40px;
+}
+
+h3 {
+  font-family: fantasy;
+  color: orange;
+  font-size: 30px;
+  text-align: center;
+}
+
+h4 {
+  font-family: fantasy;
+  color: orange;
+  font-size: 14px;
+  text-align: center;
+  line-height: 40%
+}
+
+.centre {
+  display: -webkit-inline-box;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.container {
+  position: relative;
+  width: 23%;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(25, 26, 28, 0.5);
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: 2s ease-in-out;
+}
+
+.container:hover .overlay {
+  height: 100%;
+}
+
+
+.text {
+  color: white;
+  font-size: 18px;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  text-align: center;
+}
+
+* {box-sizing:border-box}
+
+.container_skills {
+    width: 100%;
+    background-color: #f1ececb0;
+}
+
+.skills {
+    text-align: right;
+    padding: 5px;
+    color: white;
+}
+
+.title_html {width:100%; text-align: center; background-color: #4e020b;}
+.title_css {width:100%; text-align: center; background-color: #9c0013;}
+.title_js {width:100%; text-align: center; background-color: #ceb417;}
+.title_python {width:100%; text-align: center; background-color: #647320;}
+.title_java {width:100%; text-align: center; background-color: #0f7896;}
+.title_ruby {width:100%; text-align: center; background-color: #47899c;}
+.title_ut {width:100%; text-align: center; background-color: #51516d;}
+
+.html {width: 40%; background-color: #790412;}
+.css {width: 20%; background-color: #D0021B;}
+.js {width: 25%; background-color: #F9DA1C;}
+.python {width: 15%; background-color: #899E2A;}
+.java {width: 60%; background-color: #1498BE;}
+.ruby {width: 5%; background-color: #60BAD5;}
+.ut {width: 35%; background-color: #6F6F96;}
+
+.dropbutton {
+    background-color: #ef79155c;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 107px;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+/*
+Test hyperlinks to see if they color when moused over!
+https://www.w3schools.com/html/html_links.asp
+
+Make hyperlinks to classes
+<a href="https://www.w3schools.com/html/" title="Go to W3Schools HTML section">Visit our HTML Tutorial</a>
+
+Jump down to content in page
+https://www.w3schools.com/html/html_links.asp
+*/

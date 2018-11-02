@@ -1,0 +1,28 @@
+{
+  "name": "a4-webapp",
+  "version": "1.0.0",
+  "description": "Assignment 4 - Real Web Apps: Designing for an Area of Life   ===",
+  "main": "old files/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kmgumienny/a4-webapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kmgumienny/a4-webapp/issues"
+  },
+  "homepage": "https://github.com/kmgumienny/a4-webapp#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "jquery": "^3.3.1",
+    "mongoose": "^5.2.18"
+  }
+}

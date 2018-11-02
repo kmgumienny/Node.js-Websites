@@ -1,0 +1,224 @@
+
+ {{> header}}
+
+<!-- END OF NAVBAR -->
+<br>
+
+<div class="row" style="display: inline-block; width: 100%">
+
+
+    {{> modals}}
+
+
+    <div class="col-10" style="float: left;">
+
+        <div id="cardsGoHere" style="display: inline">
+            {{#each seltzers}}
+            <div class="card" style="width: 300px; height: 400px; text-align: center">
+                <img id="{{this.seltzerID}}" class="card-img-top" style="width: 70%" src="{{this.seltzerID}}.jpeg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.seltzer}}</h5>
+                    <p class="card-title" style="margin-top: -15px;">{{this.size}}</p>
+                    <h3 style="font-weight: bold; color: #00b8a4; margin-top: -10px;">{{this.price}}</h3>
+                    <div class="popup">
+                        {{#if this.quantity}}
+
+                        <a id="cartIt" class="btn btn-primary cart" style="display: inline-block; font-weight: bold; color:white">Add to Cart</a>
+                        <span class="popuptext" id="myPopup">This site is pretty exclusive! Log in to cart.</span>
+                        {{else}}
+                        <button class="btn btn-primary noHover" disabled="disabled" style="display: inline-block; font-weight: bold">Out of Stock</button>
+
+                        {{/if}}
+                    </div>
+                    {{!--
+                    <a href="#" class="btn btn-primary" style="display: inline-block; width: 42px">
+                        <i class="fas fa-heart"></i>
+                    </a> --}}
+                </div>
+            </div>
+            {{/each}}
+
+        </div>
+    </div>
+
+
+    {{#if isCart}}
+    <div id="shoppingCart" class="col-2" style="float: right; text-align: center; position: fixed; right: 20px; height: 80%; background-color: #efefef; z-index:99; display: block;">
+        <div class="shadow p-3 mb-5 bg-white" style="margin-right: -20px; margin-left: -20px;">
+            <h3 style="color: #7b7b7b; display: inline">Personal Cart</h3>
+        </div>
+
+        {{else}}
+        <div id="shoppingCart" class="col-2" style="float: right; text-align: center; position: fixed; right: 20px; height: 80%; background-color: #efefef; z-index:99; display: none;">
+            <div class="shadow p-3 mb-5 bg-white" style="margin-right: -20px; margin-left: -20px;">
+                <h3 style="color: #7b7b7b;">Personal Cart</h3>
+            </div>
+            <h3 style="color: #7b7b7b;">There doesn't appear to be anything in your cart</h3>
+            {{/if}} {{!--
+            <br>
+            <br> --}}
+            <div id="addToCart" style="margin-top: -47px; max-height: 85%; overflow-y: scroll; z-index:1; overflow-x: hidden;">
+                {{#each cart}}
+                <div class="card" style="width: 100%; margin-top:5px; margin-bot: 5px">
+                    <div class="row">
+                        <div class="col-4">
+                            <img id="{{this.seltzerID}}" class="card-img-top" src="{{this.seltzerID}}.jpeg" alt="Card image cap" style="width: 100%; height: 100%; margin-left: 8%">
+                        </div>
+                        <div class="col-5">
+                            <p style="margin: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{this.seltzer}}</p>
+                            <p style="margin: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{this.size}}</p>
+                            <p style="margin: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{this.price}}</p>
+                        </div>
+
+                        <div class="col-1">
+                            {{!--
+                            <i id="removeFromCart" class="fas fa-times" style="font-size: 25px"></i> --}}
+                            <a id="removeFromCart" class="btn btn-primary remCart" style="display: inline-block; height:100%; width:100%; font-weight: bold; color:white">
+                                <p style="transform: rotate(90deg); transform-origin: 7px 6px;">Remove</p>
+                            </a>
+
+                        </div>
+
+                    </div>
+                </div>
+                {{/each}}
+                <a id="checkout" href="#" class="btn btn-primary" style="font-weight: bold; width: 100%; bottom: -4%; position: absolute; right: 0px; height: 65px; font-size: 30px">Checkout</a>
+            </div>
+        </div> <br><br>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('.cart').each(function(){
+            $(this).click(function(e){
+                e.preventDefault();
+            var thePopup = $(this).next('span');
+            if ($('#loginA').text() == 'SIGN IN'){
+                  thePopup.toggleClass("show");
+            }else{
+                //check quantity
+                //ajax request to get quantity and subtract one
+                $.ajax({
+                    url: '/getQuantity',
+                    type: 'GET',
+                    data: {
+                        seltid: $(this).closest('.card').find('img').attr('id'),
+                        updateNumber: -1
+                    },
+
+                    success: function(response){
+                        location.reload();
+                    }
+
+                });
+
+            }
+            })
+        });
+
+        $('.remCart').each(function(){
+            $(this).click(function(e){
+                e.preventDefault();
+                //check quantity
+                //ajax request to get quantity and subtract one
+                     $.ajax({
+                        url: '/getQuantity',
+                        type: 'GET',
+                        data: {
+                            seltid: $(this).closest('.card').find('img').attr('id'),
+                            updateNumber: 1
+                        },
+                         success: function(response){
+                            location.reload();
+                        }
+                     });
+             })
+        });
+
+        // Checks a user out of the store
+        $('#checkout').on("click", function(){
+            event.preventDefault();
+
+            $.ajax({
+                url: '/checkout',
+                type: 'POST',
+                success: function (response) {
+                    // TODO success message
+                    alert("success");
+                    location.reload();
+                },
+                error: function () {
+                    // TODO fail message
+                    alert("fail to checkout");
+                }
+            });
+        });
+
+        $('#shoppingCartIcon').on("click", function(){
+           if($('#shoppingCart').is(":hidden") ){
+               $('#shoppingCart').show();
+           }else{
+               $('#shoppingCart').hide();
+           }
+        });
+
+        // Navigate to home page
+        $('#home').on("click", function() {
+            window.location = '/';
+        });
+
+        // Navigate to control page
+        $('#user').on("click", function() {
+            window.location = '/control';
+        });
+
+        // Log user out
+        $('#logout').on("click", function() {
+            event.preventDefault();
+            $.ajax({
+                url: '/logout',
+                type: "GET",
+                contentType: 'application/JSON',
+                success: function (response) {
+                    // TODO success message
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                },
+
+                error: function () {
+                    // TODO fail message
+                    alert("could not log user out");
+                }
+            });
+        });
+
+        $("#signInSubmit").click(function(event) {
+            event.preventDefault();
+            lookupUser = {
+                email: $('#signInEmail').val(),
+                password: $('#signInPassword').val()
+            };
+
+            $.ajax({
+                url: '/login',
+                type: "POST",
+                contentType: 'application/JSON',
+                data: JSON.stringify(lookupUser),
+                success: function (response) {
+                    // alert("success");
+                    $('.modal-body').replaceWith('<h4>Succesful Login </h4> <br> <h5> Redirecting </h5>');
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                },
+
+                error: function () {
+                    // TODO fail message
+                    alert("could not find user");
+                }
+            });
+        })
+    });
+</script>

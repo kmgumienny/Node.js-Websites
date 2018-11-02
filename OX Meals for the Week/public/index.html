@@ -1,0 +1,739 @@
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+
+    <title>CS4241 Assignment 3</title>
+    <meta charset="utf-8">
+
+</head>
+
+<body style="background-image: url(background.jpg); background-size: cover;">
+<div style="background-color: rgba(25, 26, 28, 0.5)">
+
+    <div>
+        <div style="width: 100%">
+            <br>
+            <h1>Meals for the Week</h1>
+        </div>
+
+    </div>
+    <hr>
+
+
+    <div class="centre">
+        <div style="width: 60%; padding-top: 10px">
+            <h2>Rate your favorite cook for the Week</h2>
+            <ul class="box">
+
+                <li>
+                    <div class="circle" style="color: #e7b148">
+                        <div style="background-image: url(alec.jpg);
+    background-size: 100%;" class="front">
+                            <div id="alecTitle" class="title">ALEC</div>
+                            <div>
+                                <section class="rating-area align-center">
+                                    <div value="alec" id="alecUp"
+                                         class="tup thumbs-up-circle align-center transition-fast">
+                                        <span class="thumbs-up transition-fast"><i
+                                                class="icon fa fa-thumbs-up thumb "></i></span>
+                                    </div>
+                                    <p id="alecRating" class="rating"></p>
+                                    <div value="alec" id="alecDown"
+                                         class="tdown thumbs-up-circle align-center transition-fast">
+                                        <span class="thumbs-down transition-fast"><i
+                                                class="icon fa fa-thumbs-down thumb "></i></span>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="circle" style="color: #e7b148">
+                        <div style="background-image: url(anthony.jpg);
+    background-size: 100%" class="front">
+                            <div id="anthonyTitle" class="title">ARRIGO</div>
+                            <div>
+                                <section class="rating-area align-center">
+                                    <div value="anthony" id="anthonyUp"
+                                         class="tup thumbs-up-circle align-center transition-fast">
+                                        <span class="thumbs-up transition-fast"><i
+                                                class="icon fa fa-thumbs-up thumb "></i></span>
+                                    </div>
+                                    <p id="anthonyRating" class="rating"></p>
+                                    <div value="anthony" id="anthonyDown"
+                                         class="tdown thumbs-up-circle align-center transition-fast">
+                                        <span class="thumbs-down transition-fast"><i
+                                                class="icon fa fa-thumbs-down thumb "></i></span>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="circle" style="color: #e7b148">
+                        <div style="background-image: url(daniel.jpg);
+    background-size: 100%" class="front">
+                            <div id="danielTitle" class="title">DANIEL</div>
+                            <div>
+                                <section class="rating-area align-center">
+                                    <div value="daniel" id="danielUp"
+                                         class="tup thumbs-up-circle align-center transition-fast">
+                                        <span class="thumbs-up transition-fast"><i
+                                                class="icon fa fa-thumbs-up thumb "></i></span>
+                                    </div>
+                                    <p id="danielRating" class="rating"></p>
+                                    <div value="daniel" id="danielDown"
+                                         class="tdown thumbs-up-circle align-center transition-fast">
+                                        <span class="thumbs-down transition-fast"><i
+                                                class="icon fa fa-thumbs-down thumb "></i></span>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="circle" style="color: #e7b148">
+                        <div style="background-image: url(matt.jpg);
+    background-size: 100%" class="front">
+                            <div id="mattTitle" class="title">HOFFER</div>
+                            <div>
+                                <section class="rating-area align-center">
+                                    <div value="matt" id="mattUp"
+                                         class="tup thumbs-up-circle align-center transition-fast">
+                                        <span class="thumbs-up transition-fast"><i
+                                                class="icon fa fa-thumbs-up thumb "></i></span>
+                                    </div>
+                                    <p id="mattRating" class="rating"></p>
+                                    <div value="matt" id="mattDown"
+                                         class="tdown thumbs-up-circle align-center transition-fast">
+                                        <span class="thumbs-down transition-fast"><i
+                                                class="icon fa fa-thumbs-down thumb "></i></span>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="circle" style="color: #e7b148">
+                        <div style="background-image: url(max.jpg);
+    background-size: 100%" class="front">
+                            <div id="maxTitle" class="title">MAX</div>
+                            <div>
+                                <section class="rating-area align-center">
+                                    <div id="maxUp" value="max"
+                                         class="tup thumbs-up-circle align-center transition-fast">
+                                        <span class="thumbs-up transition-fast"><i
+                                                class="icon fa fa-thumbs-up thumb "></i></span>
+                                    </div>
+                                    <p id="maxRating" class="rating"></p>
+                                    <div value="max" id="maxDown"
+                                         class="tdown thumbs-up-circle align-center transition-fast">
+                                        <span class="thumbs-down transition-fast"><i
+                                                class="icon fa fa-thumbs-down thumb "></i></span>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="circle" style="color: #e7b148">
+                        <div style="background-image: url(brandon.jpg);
+    background-size: 100%" class="front">
+                            <div id="brandonTitle" class="title">BRANDO</div>
+                            <div>
+                                <section class="rating-area align-center">
+                                    <div id="brandonUp" value="brandon"
+                                         class="tup thumbs-up-circle align-center transition-fast">
+                                        <span class="thumbs-up transition-fast"><i
+                                                class="icon fa fa-thumbs-up thumb "></i></span>
+                                    </div>
+                                    <p id="brandonRating" class="rating"></p>
+                                    <div id="brandonDown" value="brandon"
+                                         class="tdown thumbs-up-circle align-center transition-fast">
+                                        <span class="thumbs-down transition-fast"><i
+                                                class="icon fa fa-thumbs-down thumb "></i></span>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="circle" style="color: #e7b148">
+                        <div style="background-image: url(joe.jpg);
+    background-size: 100%" class="front">
+                            <div id="joeTitle" class="title">JOE</div>
+                            <div>
+                                <section class="rating-area align-center">
+                                    <div id="joeUp" value="joe"
+                                         class="tup thumbs-up-circle align-center transition-fast">
+                                        <span class="thumbs-up transition-fast"><i
+                                                class="icon fa fa-thumbs-up thumb "></i></span>
+                                    </div>
+                                    <p id="joeRating" class="rating"></p>
+                                    <div id="joeDown" value="joe"
+                                         class="tdown thumbs-up-circle align-center transition-fast">
+                                        <span class="thumbs-down transition-fast"><i
+                                                class="icon fa fa-thumbs-down thumb "></i></span>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="circle" style="color: #e7b148">
+                        <div style="background-image: url(noah.jpg);
+    background-size: 100%" class="front">
+                            <div id="noahTitle" class="title">NOAH</div>
+                            <div>
+                                <section class="rating-area align-center">
+                                    <div id="noahUp" value="noah"
+                                         class="tup thumbs-up-circle align-center transition-fast">
+                                        <span class="thumbs-up transition-fast"><i
+                                                class="icon fa fa-thumbs-up thumb "></i></span>
+                                    </div>
+                                    <p id="noahRating" class="rating"></p>
+                                    <div id="noahDown" value="noah"
+                                         class="tdown thumbs-up-circle align-center transition-fast">
+                                        <span class="thumbs-down transition-fast"><i
+                                                class="icon fa fa-thumbs-down thumb "></i></span>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div style="width: 40%; padding-top: 10px;">
+            <h2 align="center">This week's meals</h2>
+            <p style="text-align: center; font-size: 12px">Hit "Enter/Return" to save a meal after modifying / adding
+                one and the x to delete</p>
+
+            <table class="table2" ; style="width:100%">
+                <tbody>
+                <tr>
+                    <th class style="font-size:20px" colspan="4">Monday</th>
+                </tr>
+                <tr>
+                    <th>Lunch</th>
+                    <td>
+                        <input class="mealsInput" id="monLun" type="text" placeholder="">
+                        <button value="monLun" class="close-icon" type="reset"></button>
+                    </td>
+                    <th>Dinner</th>
+                    <td>
+                        <input class="mealsInput" id="monDin" type="text" placeholder="">
+                        <button value="monDin" class="close-icon" type="reset"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-size:20px" colspan="4">Tuesday</th>
+                </tr>
+                <tr>
+                    <th>Lunch</th>
+                    <td>
+                        <input class="mealsInput" id="tueLun" type="text" placeholder="">
+                        <button value="tueLun" class="close-icon" type="reset"></button>
+                    </td>
+                    <th>Dinner</th>
+                    <td>
+                        <input class="mealsInput" id="tueDin" type="text" placeholder="">
+                        <button value="tueDin" class="close-icon" type="reset"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-size:20px" colspan="4">Wednesday</th>
+                </tr>
+                <tr>
+                    <th>Lunch</th>
+                    <td>
+                        <input class="mealsInput" id="wedLun" type="text" placeholder="">
+                        <button value="wedLun" class="close-icon" type="reset"></button>
+                    </td>
+                    <th>Dinner</th>
+                    <td>
+                        <input class="mealsInput" id="wedDin" type="text" placeholder="">
+                        <button value="wedDin" class="close-icon" type="reset"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-size:20px" colspan="4">Thursday</th>
+                </tr>
+                <tr>
+                    <th>Lunch</th>
+                    <td>
+                        <input class="mealsInput" id="thuLun" type="text" placeholder="">
+                        <button value="thuLun" class="close-icon" type="reset"></button>
+                    </td>
+                    <th>Dinner</th>
+                    <td>
+                        <input class="mealsInput" id="thuDin" type="text" placeholder="">
+                        <button value="thuDin" class="close-icon" type="reset"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-size:20px" colspan="4">Friday</th>
+                </tr>
+                <tr>
+                    <th>Lunch</th>
+                    <td>
+                        <input class="mealsInput" id="friLun" type="text" placeholder="">
+                        <button value="friLun" class="close-icon" type="reset"></button>
+                    </td>
+                    <th>Dinner</th>
+                    <td>
+                        <input class="mealsInput" id="friDin" type="text" placeholder="">
+                        <button value="friDin" class="close-icon" type="reset"></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+    <h2 style="padding-left: 12px">Request list</h2>
+    <p style="text-align: center; font-size: 20px;">Go ahead and add or delete some items to the request list.</p>
+    <br>
+
+    <div id="table-wrapper">
+        <div id="table-scroll" style="margin: 0 auto; width: 70%;" class="datagrid">
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 30%;">Item</th>
+                    <th style="width: 15%;">Quantity</th>
+                    <th style="width: 30%;">Options</th>
+                    <th style="width: 25%;">modify</th>
+                </tr>
+                </thead>
+                <tbody id="addItems">
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+    <div style="margin: 0 auto; width: 70%;" class="datagrid">
+        <table>
+            <thead>
+            <tr>
+                <td style="width: 30%">
+                    <input id="item" type="text" placeholder="">
+                </td>
+                <td style="width: 15%">
+                    <div id>
+                    <select id="quantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                    </select>
+                    </div>
+                </td>
+                <td style="width: 30%">
+                    <input id="option" type="text" placeholder="">
+                </td>
+                <td style="width: 25%">
+                    <button id="submitRequest">Submit Request</button>
+                </td>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <br><br>
+</div>
+
+<br><br>
+
+
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+        loadMeals();
+        loadApproval();
+        loadRequests();
+    });
+
+    var enterMeal = document.getElementsByClassName('mealsInput');
+    for (var i = 0; i < enterMeal.length; i++) {
+        enterMeal[i].addEventListener('keyup', function (e) {
+            if (e.code === 'Enter') {
+                document.getElementById(this.id).style.background = 'green';
+                let addMeal = {
+                    "id": this.id,
+                    "form": "meals",
+                    "mealName": this.value
+                };
+                xhr = new XMLHttpRequest();
+                xhr.open('PUT', undefined, true);
+
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.onload = function(){
+                    if (this.status === 200) {
+                        loadMeals();
+                        setTimeout(()=>{
+                            document.getElementById(addMeal.id).style.background = 'white';
+                        }, 500);
+
+
+                    }
+                };
+
+                xhr.onerror = function () {
+                    console.log("Error deleting a meal");
+                };
+
+                xhr.send(JSON.stringify(addMeal));
+            }
+        });
+    }
+
+    var thumbsUp = document.getElementsByClassName('tup');
+    for (var x = 0; x < thumbsUp.length; x++) {
+        thumbsUp[x].addEventListener('click', function () {
+            var id = this.id;
+            var nameVal = id.substr(0, id.indexOf('Up'));
+            var updateApproval = {
+                "id": nameVal,
+                "form": "approval",
+                "type": "up"
+            };
+            xhr = new XMLHttpRequest();
+            xhr.open('PUT', "upvoteData", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = () => {
+                if (xhr.status === 200 && xhr.readyState == 4) {
+                    var approvalData = JSON.parse(xhr.response);
+                    var rating = calcApproval(approvalData.upvotes, approvalData.downvotes);
+                    document.getElementById(approvalData.name + 'Rating').innerHTML = rating + '%';
+                    document.getElementById(approvalData.name + 'Title').style.color = determineColor(rating);
+                }
+            };
+            xhr.onerror = function () {
+                console.log("Error getting Approval Rating");
+            };
+            xhr.send(JSON.stringify(updateApproval));
+        });
+    }
+
+    var thumbsDown = document.getElementsByClassName('tdown');
+    for (var x = 0; x < thumbsDown.length; x++) {
+        thumbsDown[x].addEventListener('click', function () {
+            var id = this.id;
+            var nameVal = id.substr(0, id.indexOf('Down'));
+            var updateApproval = {
+                "id": nameVal,
+                "form": "approval",
+                "type": "down"
+            };
+            xhr = new XMLHttpRequest();
+            xhr.open('PUT', "downvoteData", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = () => {
+                if (xhr.status === 200 && xhr.readyState == 4) {
+                    var approvalData = JSON.parse(xhr.response);
+                    var rating = calcApproval(approvalData.upvotes, approvalData.downvotes);
+                    document.getElementById(approvalData.name + 'Rating').innerHTML = rating + '%';
+                    document.getElementById(approvalData.name + 'Title').style.color = determineColor(rating);
+                }
+            };
+            xhr.onerror = function () {
+                console.log("Error getting Approval Rating");
+            };
+            xhr.send(JSON.stringify(updateApproval));
+        });
+    }
+
+    var clearButtons = document.getElementsByClassName('close-icon');
+    for (var x = 0; x < clearButtons.length; x++) {
+        clearButtons[x].addEventListener('click', function () {
+            var id = this.value;
+            var deleteId = {
+                "id": this.value,
+                "form": "meals"
+            };
+            xhr = new XMLHttpRequest();
+            xhr.open('DELETE', undefined, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById(id).placeholder = "";
+                    loadMeals();
+                }
+            };
+
+            xhr.onerror = function () {
+                console.log("Error deleting a meal");
+            };
+
+            xhr.send(JSON.stringify(deleteId));
+        });
+    }
+
+    function setEventListeners() {
+        var delButtons = document.getElementsByClassName('delRequest');
+        for (var x = 0; x < delButtons.length; x++) {
+            delButtons[x].addEventListener('click', function () {
+                var id = this.value;
+                var deleteId = {
+                    "id": this.value,
+                    "form": "requests"
+                };
+                xhr = new XMLHttpRequest();
+                xhr.open('DELETE', "undefined", true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+
+                xhr.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var element = document.getElementById(id);
+                        element.parentNode.removeChild(element);
+                        fixAlternation();
+                    }
+                };
+
+                xhr.onerror = function () {
+                    console.log("Error deleting a meal");
+                };
+
+                xhr.send(JSON.stringify(deleteId));
+            });
+        }
+    }
+
+
+    document.getElementById('submitRequest').addEventListener('click', function(){
+        var name = document.getElementById('item').value;
+        var quantity = document.getElementById('quantity').value;
+        var option = document.getElementById('option').value;
+
+        if(!name || !quantity){
+            alert("Missing field item name or quantity");
+        }
+
+        var addReq = {
+            name: name,
+            quantity: quantity,
+            option: option
+        };
+
+        xhr = new XMLHttpRequest();
+        xhr.open('POST', 'aReq', true);
+
+        xhr.onload = function(){
+            if (this.status === 200 && this.readyState === 4) {
+                var newReq = JSON.parse(this.response);
+                addRequest(newReq);
+                document.getElementById('item').value = '';
+                document.getElementById('option').value = '';
+                fixAlternation();
+            }
+        };
+
+        xhr.onerror = () =>{
+            console.log("We have an error adding element");
+        };
+        xhr.send(JSON.stringify(addReq));
+
+    });
+
+    function fixAlternation(){
+        var parent = document.getElementById('addItems');
+        for(let x = 0; x < parent.childElementCount; x++){
+            parent.children[x].classList.remove("alt");
+            if(x%2 == 1)
+                parent.children[x].classList.add("alt")
+        }
+    }
+
+
+
+    function addRequest(request){
+        var htmlInput =
+            '<td>' + request.name + '</td>' +
+            '<td>' + request.quantity + '</td>' +
+            '<td>' + request.options + '</td>' +
+            '<td><button value="' + request.reqId + '" class="delRequest" type="reset">Delete Request</button></td>';
+
+        var aRow = document.createElement('tr');
+        aRow.id = request.reqId;
+        if (i % 2 == 1) {
+            aRow.classList.add("alt");
+            // if(i > 4)
+            // alert(document.getElementById(requests[i-1].reqId).previousElementSibling.id);
+        }
+        aRow.innerHTML = htmlInput;
+
+        document.getElementById('addItems').appendChild(aRow);
+    }
+
+
+    function loadMeals() {
+        xhr = new XMLHttpRequest();
+        xhr.open('GET', '/meal-data', true);
+
+        document.body.style.cursor = "wait";
+
+        xhr.onload = function () {
+            if (this.status === 200) {
+                var mealData = JSON.parse(this.response);
+                for (var i in mealData) {
+                    var meal_id = mealData[i].mealID;
+                    document.getElementById(meal_id).placeholder = mealData[i].text;
+                }
+                ;
+            }
+            document.body.style.cursor = "default";
+
+        };
+
+        xhr.onerror = function () {
+            console.log("Error getting files from DB for meals of the week");
+        };
+
+        xhr.send();
+    }
+
+
+    function loadRequests() {
+        xhr = new XMLHttpRequest();
+        xhr.open('GET', '/request-data', true);
+
+        // Change cursor to wait
+        document.body.style.cursor = "wait";
+
+        xhr.onload = function () {
+            if (this.status === 200 && this.readyState === 4) {
+                var requests = JSON.parse(this.response);
+                var size = requests.length;
+                for (var i in requests) {
+                    var htmlInput =
+                        '<td>' + requests[i].name + '</td>' +
+                        '<td>' + requests[i].quantity + '</td>' +
+                        '<td>' + requests[i].options + '</td>' +
+                        '<td><button value="' + requests[i].reqId + '" class="delRequest" type="reset">Delete Request</button></td>';
+
+                    var aRow = document.createElement('tr');
+                    aRow.id = requests[i].reqId;
+                    if (i % 2 == 1) {
+                        aRow.classList.add("alt");
+                        // if(i > 4)
+                        // alert(document.getElementById(requests[i-1].reqId).previousElementSibling.id);
+                    }
+                    aRow.innerHTML = htmlInput;
+
+                    document.getElementById('addItems').appendChild(aRow);
+                };
+                setEventListeners();
+            }
+            document.body.style.cursor = "default";
+        };
+
+        xhr.onerror = function () {
+            console.log("Error getting files from DB for meals of the week");
+        };
+        xhr.send();
+    }
+
+
+    function loadApproval() {
+        xhr = new XMLHttpRequest();
+        xhr.open('GET', '/approval-data', true);
+
+        // Change cursor to wait
+        document.body.style.cursor = "wait";
+
+        xhr.onload = function () {
+            if (this.status === 200 && this.readyState === 4) {
+                var approvalData = JSON.parse(this.response);
+                for (var i in approvalData) {
+                    var rating = calcApproval(approvalData[i].upvotes, approvalData[i].downvotes);
+                    var nameVal = approvalData[i].name + 'Rating';
+                    document.getElementById(nameVal).innerHTML = rating + '%';
+                    document.getElementById(approvalData[i].name + 'Title').style.color = determineColor(rating);
+                };
+            }
+            document.body.style.cursor = "default";
+        };
+
+        xhr.onerror = function () {
+            console.log("Error getting files from DB for meals of the week");
+        };
+        xhr.send();
+    }
+
+    function determineColor(a) {
+        switch (true) {
+            case a > 90:
+                return "#00ff00";
+                break;
+            case a > 80:
+                return "#c1ff51";
+                break;
+            case a > 70:
+                return "#f3ff4f";
+                break;
+            case a > 60:
+                return "#ffd457";
+                break;
+            case a > 50:
+                return "#ffb135";
+                break;
+            case a > 40:
+                return "#ff9e3c";
+                break;
+            case a > 30:
+                return "#ff873f";
+                break;
+            case a > 20:
+                return "#ff593b";
+                break;
+            case a > 10:
+                return "#ff4031";
+                break;
+            case a > 0:
+                return "#ff0000";
+                break;
+            default:
+                return "#3024ff";
+        }
+
+    }
+
+    function calcApproval(a, b) {
+        if (b === 0 && a !== 0)
+            return 100;
+        else {
+            if (b === 0)
+                b++;
+        }
+        return (Math.floor((a / (a + b)) * 100));
+    }
+
+</script>
+
+</body>
+
+</html>
